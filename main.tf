@@ -14,6 +14,6 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "rg_azu_east2_dns"
+  name     = "rg_azu_e2_dns"
   location = "eastus2"
 }
