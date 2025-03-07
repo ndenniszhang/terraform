@@ -1,19 +1,17 @@
 terraform {
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.0.2"
+      source = "hashicorp/azurerm"
+      version = "4.22.0"
     }
   }
-
-  required_version = ">= 1.1.0"
 }
 
 provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = "rg_azu_e2_dns"
-  location = "eastus2"
-}
+# resource "azurerm_resource_group" "rg" {
+#   name     = "rg_azu_e2_dns"
+#   location = "eastus2"
+# }

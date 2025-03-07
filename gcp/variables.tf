@@ -1,4 +1,4 @@
-variable "project" {}
+variable "project_id" {}
 
 variable "region" {
   default = "us-east4"
@@ -8,14 +8,24 @@ variable "zone" {
   default = "us-east4-a"
 }
 
-variable "docker_image" {
-  description = "pihole/pihole:latest"
+variable "timezone" {
+  default = "US/Eastern"
+}
+
+variable "namespace" {
+  default = "pihole"
+}
+
+variable "container_image" {
+  default = "pihole/pihole:latest"
 }
 
 variable "service_name" {
-  description = "pihole-service"
+  default = "pihole-service"
 }
 
-variable "bucket_name" {
-  description = "pihole-data"
+variable "pihole_password" {}
+
+variable "upstream_dns" {
+  default = "1.1.1.1;8.8.8.8"
 }
