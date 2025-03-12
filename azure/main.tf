@@ -12,12 +12,12 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "parameters(resource_group_name)"
-  location = "parameters(location)"
+  name     = var.resource_group_name
+  location = var.location
 }
 
 resource "azurerm_storage_account" "storage" {
-  name                     = "acistorage+parameters(app_name)"
+  name                     = "acistorage" + var.app_name
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
@@ -39,8 +39,8 @@ resource "azurerm_container_group" "aci" {
   os_type             = "Linux"
 
   container {
-    name   = "parameters(app_name)"
-    image  = "parameters(image_name)"
+    name   = var.app_name
+    image  = var.image_name
     cpu    = "1.0"
     memory = "1.0"
 

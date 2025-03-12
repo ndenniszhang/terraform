@@ -1,4 +1,6 @@
-variable "project_id" {}
+variable "project_id" {
+  sensitive = true
+}
 
 variable "region" {
   default = "us-east4"
@@ -24,7 +26,9 @@ variable "service_name" {
   default = "pihole-service"
 }
 
-variable "pihole_password" {}
+variable "pihole_password" {
+  sensitive = true
+}
 
 variable "upstream_dns" {
   default = "1.1.1.1;8.8.8.8"
