@@ -48,6 +48,26 @@ resource "azurerm_container_group" "aci" {
     cpu    = "1.0"
     memory = "1.0"
 
+    ports {
+      port     = 443
+      protocol = "TCP"
+    }
+
+    ports {
+      port     = 53
+      protocol = "UDP"
+    }
+
+    ports {
+      port     = 53
+      protocol = "TCP"
+    }
+
+    ports {
+      port     = 853
+      protocol = "TCP"
+    }
+
     volume {
       name                 = "filestorage"
       mount_path           = "/etc/pihole"
