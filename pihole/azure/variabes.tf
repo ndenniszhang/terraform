@@ -11,9 +11,22 @@ variable "resource_group_name" {
 }
 
 variable "app_name" {
+  type        = string
   default = "pihole"
 }
 
 variable "image_name" {
+  type        = string
   default = "pihole/pihole:latest"
+}
+
+variable "timezone" {
+  type        = string
+  default = "US/Eastern"
+}
+
+variable "password" {
+  description = "Password for web interface"
+  type        = string
+  sensitive = true
 }
