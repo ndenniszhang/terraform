@@ -24,8 +24,14 @@ resource "azurerm_storage_account" "storage" {
   account_replication_type = "LRS"
 }
 
-resource "azurerm_storage_share" "share" {
-  name               = "${var.app_name}share"
+resource "azurerm_storage_share" "work" {
+  name               = "${var.app_name}work"
+  storage_account_id = azurerm_storage_account.storage.name
+  quota              = 4 //GB
+}
+
+resource "azurerm_storage_share" "conf" {
+  name               = "${var.app_name}conf"
   storage_account_id = azurerm_storage_account.storage.name
   quota              = 4 //GB
 }
@@ -44,20 +50,38 @@ resource "azurerm_container_group" "aci" {
     memory = "1.0"
 
     environment_variables = {
-      TZ = var.timezone
+      TZ = "UTC"
     }
 
     ports {
-      port     = 80
+      port     = 443
+      protocol = tcp
+    }
+
+    ports {
+      port     = 53
+      protocol = udp
+    }
+
+        ports {
+      port     = 853
       protocol = tcp
     }
 
     volume {
-      name                 = "filestorage"
-      mount_path           = var.mount_path
+      name                 = "workdir"
+      mount_path           = var.work_path
       storage_account_name = azurerm_storage_account.storage.name
       storage_account_key  = azurerm_storage_account.storage.primary_access_key
-      share_name           = azurerm_storage_share.share.name
+      share_name           = azurerm_storage_share.work.name
+    }
+
+    volume {
+      name                 = "confdir"
+      mount_path           = var.work_path
+      storage_account_name = azurerm_storage_account.storage.name
+      storage_account_key  = azurerm_storage_account.storage.primary_access_key
+      share_name           = azurerm_storage_share.conf.name
     }
   }
 }
