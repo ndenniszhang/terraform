@@ -7,7 +7,7 @@ variable "location" {
 variable "resource_group_name" {
   description = "Name of the resource group"
   type        = string
-  default     = "rg_azu_e2_dns"
+  default     = "rg_azu_e2_pihole"
 }
 
 variable "app_name" {

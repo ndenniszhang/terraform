@@ -17,31 +17,32 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_storage_account" "storage" {
-  name                     = "${var.app_name}storage"
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
+  name                     = "${var.app_name}storageacct"
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
 }
 
 resource "azurerm_storage_share" "work" {
   name               = "${var.app_name}work"
-  storage_account_id = azurerm_storage_account.storage.name
-  quota              = 4 //GB
+  storage_account_id = azurerm_storage_account.storage.id
+  quota              = 1 //GB
 }
 
 resource "azurerm_storage_share" "conf" {
   name               = "${var.app_name}conf"
-  storage_account_id = azurerm_storage_account.storage.name
-  quota              = 4 //GB
+  storage_account_id = azurerm_storage_account.storage.id
+  quota              = 1 //GB
 }
 
 resource "azurerm_container_group" "aci" {
   name                = "${var.app_name}aci"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.id
   ip_address_type     = "Public"
   os_type             = "Linux"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  dns_name_label      = var.app_name
 
   container {
     name   = var.app_name
@@ -53,19 +54,30 @@ resource "azurerm_container_group" "aci" {
       TZ = "UTC"
     }
 
+    # only used for initial setup, should be remove after setup
     ports {
-      port     = 443
-      protocol = tcp
+      port     = 3000
+      protocol = "TCP"
+    }
+
+    ports {
+      port     = 80
+      protocol = "TCP"
     }
 
     ports {
       port     = 53
-      protocol = udp
+      protocol = "UDP"
     }
 
-        ports {
+    ports {
+      port     = 443
+      protocol = "TCP"
+    }
+
+    ports {
       port     = 853
-      protocol = tcp
+      protocol = "TCP"
     }
 
     volume {
@@ -78,7 +90,7 @@ resource "azurerm_container_group" "aci" {
 
     volume {
       name                 = "confdir"
-      mount_path           = var.work_path
+      mount_path           = var.conf_path
       storage_account_name = azurerm_storage_account.storage.name
       storage_account_key  = azurerm_storage_account.storage.primary_access_key
       share_name           = azurerm_storage_share.conf.name

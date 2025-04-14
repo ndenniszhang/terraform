@@ -36,6 +36,7 @@ resource "azurerm_container_group" "aci" {
   resource_group_name = azurerm_resource_group.rg.id
   ip_address_type     = "Public"
   os_type             = "Linux"
+  dns_name_label      = var.app_name
 
   container {
     name   = var.app_name
