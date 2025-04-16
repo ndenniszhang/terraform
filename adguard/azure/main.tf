@@ -44,56 +44,83 @@ resource "azurerm_container_group" "aci" {
   resource_group_name = azurerm_resource_group.rg.name
   dns_name_label      = var.app_name
 
+  # exposed_port {
+  #   port     = 80
+  #   protocol = "TCP"
+  # }
+
+  # exposed_port {
+  #   port     = 443
+  #   protocol = "TCP"
+  # }
+
+  # exposed_port {
+  #   port     = 53
+  #   protocol = "TCP"
+  # }
+
+  # container {
+  #   name   = var.app_name
+  #   image  = var.adguard_image
+  #   cpu    = "1.0"
+  #   memory = "1.0"
+
+  #   environment_variables = {
+  #     TZ                   = "UTC"
+  #     UPSTREAM_DNS_SERVERS = azurerm_container_group.aci.containers[1].ip_address
+  #   }
+
+  #   ports {
+  #     port     = 80
+  #     protocol = "TCP"
+  #   }
+
+  #   ports {
+  #     port     = 53
+  #     protocol = "UDP"
+  #   }
+
+  #   ports {
+  #     port     = 443
+  #     protocol = "TCP"
+  #   }
+
+  #   ports {
+  #     port     = 853
+  #     protocol = "TCP"
+  #   }
+
+  #   volume {
+  #     name                 = "workdir"
+  #     mount_path           = var.work_path
+  #     storage_account_name = azurerm_storage_account.storage.name
+  #     storage_account_key  = azurerm_storage_account.storage.primary_access_key
+  #     share_name           = azurerm_storage_share.work.name
+  #   }
+
+  #   volume {
+  #     name                 = "confdir"
+  #     mount_path           = var.conf_path
+  #     storage_account_name = azurerm_storage_account.storage.name
+  #     storage_account_key  = azurerm_storage_account.storage.primary_access_key
+  #     share_name           = azurerm_storage_share.conf.name
+  #   }
+  # }
+
   container {
-    name   = var.app_name
-    image  = var.image_name
-    cpu    = "1.0"
-    memory = "1.0"
-
-    environment_variables = {
-      TZ = "UTC"
-    }
-
-    # only used for initial setup, should be remove after setup
-    ports {
-      port     = 3000
-      protocol = "TCP"
-    }
-
-    ports {
-      port     = 80
-      protocol = "TCP"
-    }
+    name   = "${var.app_name}unbound"
+    image  = var.unbound_image
+    cpu    = "0.5"
+    memory = "0.5"
 
     ports {
       port     = 53
       protocol = "UDP"
     }
 
-    ports {
-      port     = 443
-      protocol = "TCP"
-    }
-
-    ports {
-      port     = 853
-      protocol = "TCP"
-    }
-
-    volume {
-      name                 = "workdir"
-      mount_path           = var.work_path
-      storage_account_name = azurerm_storage_account.storage.name
-      storage_account_key  = azurerm_storage_account.storage.primary_access_key
-      share_name           = azurerm_storage_share.work.name
-    }
-
-    volume {
-      name                 = "confdir"
-      mount_path           = var.conf_path
-      storage_account_name = azurerm_storage_account.storage.name
-      storage_account_key  = azurerm_storage_account.storage.primary_access_key
-      share_name           = azurerm_storage_share.conf.name
-    }
+    # ports {
+    #   port     = 8953
+    #   protocol = "UDP"
+    # }
   }
 }

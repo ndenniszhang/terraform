@@ -16,7 +16,7 @@ variable "app_name" {
   default     = "adguard"
 }
 
-variable "image_name" {
+variable "adguard_image" {
   description = "The Docker image for AdGuard Home"
   type        = string
   default     = "adguard/adguardhome:latest"
@@ -30,4 +30,10 @@ variable "work_path" {
 variable "conf_path" {
   type        = string
   default     = "/opt/adguardhome/conf"
+}
+
+variable "unbound_image" {
+  description = "The Docker image for Unbound"
+  type        = string
+  default     = "mvance/unbound:latest"
 }
