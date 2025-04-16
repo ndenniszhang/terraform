@@ -23,17 +23,22 @@ variable "adguard_image" {
 }
 
 variable "work_path" {
-  type        = string
-  default     = "/opt/adguardhome/work"
+  type    = string
+  default = "/opt/adguardhome/work"
 }
 
 variable "conf_path" {
-  type        = string
-  default     = "/opt/adguardhome/conf"
+  type    = string
+  default = "/opt/adguardhome/conf"
 }
 
 variable "unbound_image" {
   description = "The Docker image for Unbound"
   type        = string
   default     = "mvance/unbound:latest"
+}
+
+variable "unbound_conf_path" {
+  type    = string
+  default = "/opt/unbound/etc/unbound"
 }
