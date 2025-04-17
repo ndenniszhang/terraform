@@ -60,7 +60,6 @@ resource "azurerm_container_group" "aci" {
 
   diagnostics {
     log_analytics {
-      log_type = "ContainerInstanceLogs"
       workspace_id  = azurerm_log_analytics_workspace.logs.workspace_id
       workspace_key = azurerm_log_analytics_workspace.logs.primary_shared_key
     }
@@ -120,10 +119,6 @@ resource "azurerm_container_group" "aci" {
     cpu    = "1.0"
     memory = "1.0"
 
-    # security {
-    #   privilege_enabled = true
-    # }
-
     ports {
       port     = 53
       protocol = "UDP"
@@ -134,12 +129,12 @@ resource "azurerm_container_group" "aci" {
     #   protocol = "UDP"
     # }
 
-    volume {
-      name                 = "conf"
-      mount_path           = var.unbound_conf_path
-      storage_account_name = azurerm_storage_account.storage.name
-      storage_account_key  = azurerm_storage_account.storage.primary_access_key
-      share_name           = azurerm_storage_share.unboundconf.name
-    }
+    # volume {
+    #   name                 = "conf"
+    #   mount_path           = var.unbound_conf_path
+    #   storage_account_name = azurerm_storage_account.storage.name
+    #   storage_account_key  = azurerm_storage_account.storage.primary_access_key
+    #   share_name           = azurerm_storage_share.unboundconf.name
+    # }
   }
 }
