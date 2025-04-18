@@ -4,7 +4,7 @@ resource "azurerm_container_group" "aci" {
   os_type             = "Linux"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  dns_name_label      = var.app_name
+  dns_name_label      = "adblocker"
 
   diagnostics {
     log_analytics {
@@ -14,15 +14,15 @@ resource "azurerm_container_group" "aci" {
   }
 
   container {
-    name   = var.app_name
+    name   = "${var.app_name}adguard"
     image  = var.adguard_image
     cpu    = "1.0"
     memory = "1.0"
 
-    # environment_variables = {
-    #   TZ                   = "UTC"
-    #   UPSTREAM_DNS_SERVERS = azurerm_container_group.aci.containers[1].ip_address
-    # }
+    ports {
+      port     = 53
+      protocol = "UDP"
+    }
 
     ports {
       port     = 80
@@ -30,18 +30,27 @@ resource "azurerm_container_group" "aci" {
     }
 
     # ports {
-    #   port     = 53
-    #   protocol = "UDP"
+    #   port     = 443
+    #   protocol = "TCP"
     # }
 
-    ports {
-      port     = 443
-      protocol = "TCP"
-    }
+    # ports {
+    #   port     = 853
+    #   protocol = "TCP"
+    # }
 
-    ports {
-      port     = 853
-      protocol = "TCP"
+    # used for initial setup can be disabled after setup
+    # ports {
+    #   port     = 3000
+    #   protocol = "TCP"
+    # }
+
+    volume {
+      name                 = "adguardconf"
+      mount_path           = "${var.adguard_path}/conf"
+      storage_account_name = azurerm_storage_account.storage.name
+      storage_account_key  = azurerm_storage_account.storage.primary_access_key
+      share_name           = azurerm_storage_share.adguard.name
     }
 
     volume {
@@ -50,14 +59,6 @@ resource "azurerm_container_group" "aci" {
       storage_account_name = azurerm_storage_account.storage.name
       storage_account_key  = azurerm_storage_account.storage.primary_access_key
       share_name           = azurerm_storage_share.adguard.name
-    }
-
-    volume {
-      name                 = "adguardconf"
-      mount_path           = "${var.adguard_path}/conf"
-      storage_account_name = azurerm_storage_account.storage.name
-      storage_account_key  = azurerm_storage_account.storage.primary_access_key
-      share_name           = azurerm_storage_share.cadguardonf.name
     }
   }
 
@@ -74,10 +75,11 @@ resource "azurerm_container_group" "aci" {
     ]
 
     ports {
-      port     = 53
+      port     = 5353
       protocol = "UDP"
     }
 
+    # for remote administration
     # ports {
     #   port     = 8953
     #   protocol = "UDP"

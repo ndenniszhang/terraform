@@ -7,13 +7,13 @@ variable "location" {
 variable "resource_group_name" {
   description = "Name of the resource group"
   type        = string
-  default     = "rg_azu_e2_adguard"
+  default     = "rg_azu_e2_sdns"
 }
 
 variable "app_name" {
   description = "The name of the application"
   type        = string
-  default     = "adguard"
+  default     = "sdns"
 }
 
 variable "adguard_image" {

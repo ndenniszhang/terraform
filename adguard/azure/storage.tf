@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "storage" {
-  name                     = "${var.app_name}storageacct"
+  name                     = "${var.app_name}storage"
   account_tier             = "Standard"
   account_replication_type = "LRS"
   resource_group_name      = azurerm_resource_group.rg.name
