@@ -22,14 +22,9 @@ variable "adguard_image" {
   default     = "adguard/adguardhome:latest"
 }
 
-variable "work_path" {
+variable "adguard_path" {
   type    = string
-  default = "/opt/adguardhome/work"
-}
-
-variable "conf_path" {
-  type    = string
-  default = "/opt/adguardhome/conf"
+  default = "/opt/adguardhome"
 }
 
 variable "unbound_image" {
@@ -38,7 +33,7 @@ variable "unbound_image" {
   default     = "mvance/unbound:latest"
 }
 
-variable "unbound_conf_path" {
+variable "unbound_path" {
   type    = string
   default = "/opt/unbound/etc/unbound"
 }
