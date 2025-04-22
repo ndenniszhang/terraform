@@ -28,15 +28,15 @@ resource "azurerm_container_group" "aci" {
       protocol = "TCP"
     }
 
-    # ports {
-    #   port     = 443
-    #   protocol = "TCP"
-    # }
+    ports {
+      port     = 443
+      protocol = "TCP"
+    }
 
-    # ports {
-    #   port     = 853
-    #   protocol = "TCP"
-    # }
+    ports {
+      port     = 853
+      protocol = "TCP"
+    }
 
     # used for initial setup can be disabled after setup
     # ports {

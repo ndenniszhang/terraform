@@ -19,7 +19,8 @@ provider "registry.terraform.io/cloudflare/cloudflare" {
 }
 
 provider "registry.terraform.io/hashicorp/azurerm" {
-  version = "4.26.0"
+  version     = "4.26.0"
+  constraints = "4.26.0"
   hashes = [
     "h1:aDlCe/5J3dYrHZXURQxZM9mdCr29rJemJee6BdWTg94=",
     "zh:0e381bace81028596d60e253bc320bf62d00ae2ec207d7c7e70cdbec5f543334",
