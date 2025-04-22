@@ -1,4 +1,4 @@
 output "name" {
   description = "Name of the DNS record"
-  value       = cloudflare_dns_record.sdns.name
+  value       = module.cdn.name
 }

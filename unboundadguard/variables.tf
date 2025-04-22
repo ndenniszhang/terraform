@@ -21,14 +21,3 @@ variable "account_id" {
   type        = string
   sensitive   = true
 }
-
-variable "domain" {
-  description = "Domain name for the DNS record"
-  type        = string
-  default     = "denniszhang.dev"
-}
-
-variable "ip_address" {
-  description = "IP address for the DNS record"
-  type        = string
-}

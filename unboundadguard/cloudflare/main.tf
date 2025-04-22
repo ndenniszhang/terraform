@@ -1,13 +1,22 @@
+terraform {
+  required_providers {
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "5.3.0"
+    }
+  }
+}
+
 provider "cloudflare" {
   email     = var.email
   api_token = var.api_token
-  base_url  = var.domain
 }
 
 resource "cloudflare_dns_record" "sdns" {
   zone_id = var.zone_id
   name    = "sdns"
-  content = azurerm_container_group.aci.ip_address
+  content = var.ip_address
   type    = "A"
   proxied = true
+  ttl     = 1
 }
