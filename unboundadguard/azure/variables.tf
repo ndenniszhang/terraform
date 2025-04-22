@@ -10,7 +10,7 @@ variable "resource_group_name" {
   default     = "rg_azu_e2_sdns"
 }
 
-variable "app_name" {
+variable "service_name" {
   description = "The name of the application"
   type        = string
   default     = "sdns"

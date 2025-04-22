@@ -1,29 +1,29 @@
 variable "email" {
   description = "Cloudflare account email"
   type        = string
-  default     = ""
+  sensitive   = true
 }
 
-variable "api_key" {
+variable "api_token" {
   description = "Cloudflare API key"
   type        = string
-  default     = ""
+  sensitive   = true
 }
 
 variable "zone_id" {
   description = "Cloudflare zone ID"
   type        = string
-  default = "<YOUR_ZONE_ID>"
+  sensitive   = true
 }
 
 variable "account_id" {
   description = "Cloudflare account ID"
   type        = string
-  default = "<YOUR_ACCOUNT_ID>"
+  sensitive   = true
 }
 
 variable "domain" {
   description = "Domain name for the DNS record"
   type        = string
-  default = "<YOUR_DOMAIN>"
+  default     = "denniszhang.dev"
 }
