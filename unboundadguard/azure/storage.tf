@@ -13,11 +13,10 @@ resource "azurerm_storage_share" "adguard" {
   quota              = 1 //GB
 }
 
-resource "azurerm_storage_share_file" "adguard_conf" {
+resource "azurerm_storage_share_file" "AdGuardHome" {
   name             = "AdGuardHome.yaml"
   storage_share_id = azurerm_storage_share.adguard.id
   source           = "../config/adguard/AdGuardHome.yaml"
-  depends_on       = [azurerm_storage_share.adguard]
 }
 
 
@@ -27,44 +26,32 @@ resource "azurerm_storage_share" "unbound" {
   quota              = 1 //GB
 }
 
-resource "azurerm_storage_share_file" "unbound_conf" {
+resource "azurerm_storage_share_file" "a-records" {
   name             = "a-records.conf"
   storage_share_id = azurerm_storage_share.unbound.id
   source           = "../confg/unbound/a-records.conf"
-  depends_on       = [azurerm_storage_share.unbound]
 }
 
-resource "azurerm_storage_share_file" "unbound_conf" {
+resource "azurerm_storage_share_file" "forward-records" {
   name             = "forward-records.conf"
   storage_share_id = azurerm_storage_share.unbound.id
   source           = "../confg/unbound/forward-records.conf"
-  depends_on       = [azurerm_storage_share.unbound]
 }
 
-resource "azurerm_storage_share_file" "unbound_conf" {
+resource "azurerm_storage_share_file" "hints" {
   name             = "root.hints"
   storage_share_id = azurerm_storage_share.unbound.id
   source           = "../confg/unbound/root.hints"
-  depends_on       = [azurerm_storage_share.unbound]
 }
 
-resource "azurerm_storage_share_file" "unbound_conf" {
+resource "azurerm_storage_share_file" "srv-records" {
   name             = "srv-records.conf"
   storage_share_id = azurerm_storage_share.unbound.id
   source           = "../confg/unbound/srv-records.conf"
-  depends_on       = [azurerm_storage_share.unbound]
 }
 
-resource "azurerm_storage_share_file" "unbound_conf" {
+resource "azurerm_storage_share_file" "conf" {
   name             = "unbound.conf"
   storage_share_id = azurerm_storage_share.unbound.id
   source           = "../confg/unbound/unbound.conf"
-  depends_on       = [azurerm_storage_share.unbound]
-}
-
-resource "azurerm_storage_share_file" "unbound_conf" {
-  name             = "unbound.conf"
-  storage_share_id = azurerm_storage_share.unbound.id
-  source           = "../confg/unbound/unbound.conf"
-  depends_on       = [azurerm_storage_share.unbound]
 }
