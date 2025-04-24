@@ -37,3 +37,15 @@ variable "unbound_path" {
   type    = string
   default = "/opt/unbound/etc/unbound"
 }
+
+variable "certificate_pem" {
+  description = "The certificate in PEM format"
+  type        = string
+  sensitive   = true
+}
+
+variable "private_key_pem" {
+  description = "The private key in PEM format"
+  type        = string
+  sensitive   = true
+}

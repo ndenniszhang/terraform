@@ -19,6 +19,17 @@ resource "azurerm_storage_share" "adguard" {
 #   source           = "../config/adguard/AdGuardHome.yaml"
 # }
 
+resource "azurerm_storage_share_file" "certificate" {
+  name             = "certificate.pem"
+  storage_share_id = azurerm_storage_share.adguard.id
+  source           = var.certificate_pem
+}
+
+resource "azurerm_storage_share_file" "private_key" {
+  name             = "private_key.pem"
+  storage_share_id = azurerm_storage_share.adguard.id
+  source           = var.private_key_pem
+}
 
 resource "azurerm_storage_share" "unbound" {
   name               = "${var.service_name}unbound"

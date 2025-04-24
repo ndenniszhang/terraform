@@ -22,10 +22,9 @@ variable "account_id" {
   sensitive   = true
 }
 
-variable "domain" {
-  description = "Domain name for the DNS record"
+variable "common_name" {
+  description = "Common name for the certificate"
   type        = string
-  default     = "denniszhang.dev"
 }
 
 variable "ip_address" {

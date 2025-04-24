@@ -14,7 +14,7 @@ provider "cloudflare" {
 
 resource "cloudflare_dns_record" "sdns" {
   zone_id = var.zone_id
-  name    = "sdns"
+  name    = var.common_name
   content = var.ip_address
   type    = "A"
   proxied = true
