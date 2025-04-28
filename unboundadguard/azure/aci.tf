@@ -35,7 +35,7 @@ resource "azurerm_container_group" "aci" {
 
     ports {
       port     = 853
-      protocol = "UDP"
+      protocol = "TCP"
     }
 
     # used for initial setup can be disabled after setup

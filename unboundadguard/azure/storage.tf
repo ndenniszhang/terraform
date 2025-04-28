@@ -25,14 +25,19 @@ resource "azurerm_storage_share_file" "certificate" {
   name             = "certificate.pem"
   storage_share_id = azurerm_storage_share.adguard.id
   source           = var.cert_path
-  content_md5      = filemd5("${var.cert_path}")
+  content_md5      = filemd5(var.cert_path)
 }
+
+# locals {
+#   cert_md5 = try(filemd5(var.cert_path), "")
+#   key_md5  = try(filemd5(var.key_path), "")
+# }
 
 resource "azurerm_storage_share_file" "private_key" {
   name             = "private_key.pem"
   storage_share_id = azurerm_storage_share.adguard.id
   source           = var.key_path
-  content_md5      = filemd5("${var.key_path}")
+  content_md5      = filemd5(var.key_path)
 }
 
 

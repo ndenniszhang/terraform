@@ -9,7 +9,7 @@ module "tls" {
   key_path    = var.acme_key_path
 }
 
-module "sdns" {
+module "dns" {
   source          = "./azure"
   tenant_id       = var.azure_tenant_id
   client_id       = var.azure_client_id
@@ -28,5 +28,5 @@ module "cdn" {
   account_id  = var.cloudflare_account_id
   common_name = var.common_name
   domain_name = var.domain_name
-  ip_address  = module.sdns.container_ip
+  ip_address  = module.dns.container_ip
 }
