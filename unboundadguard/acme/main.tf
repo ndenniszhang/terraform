@@ -39,11 +39,11 @@ resource "acme_certificate" "certificate" {
 }
 
 resource "local_sensitive_file" "certificate" {
-  content  = acme_certificate.certificate.certificate_pem
-  filename = "${path.root}/config/cert/certificate.pem"
+  content  = "${acme_certificate.certificate.certificate_pem}${acme_certificate.certificate.issuer_pem}"
+  filename = var.cert_path
 }
 
 resource "local_sensitive_file" "private_key" {
   content  = acme_certificate.certificate.private_key_pem
-  filename = "${path.root}/config/cert/private_key.pem"
+  filename = var.key_path
 }

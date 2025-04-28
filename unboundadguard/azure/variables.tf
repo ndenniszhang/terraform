@@ -31,13 +31,12 @@ variable "location" {
 variable "resource_group_name" {
   description = "Name of the resource group"
   type        = string
-  default     = "rg_azu_e2_sdns"
+  default     = "rg_azu_e2_dns"
 }
 
-variable "service_name" {
+variable "common_name" {
   description = "The name of the application"
   type        = string
-  default     = "sdns"
 }
 
 variable "adguard_image" {
@@ -62,4 +61,14 @@ variable "unbound_path" {
   description = "The path in Unbound conainer to persist"
   type        = string
   default     = "/opt/unbound/etc/unbound"
+}
+
+variable "cert_path" {
+  description = "The local path to the certificate file"
+  type        = string
+}
+
+variable "key_path" {
+  description = "The local path to the private key file"
+  type        = string
 }

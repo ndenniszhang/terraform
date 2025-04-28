@@ -12,13 +12,18 @@ provider "cloudflare" {
   api_token = var.api_token
 }
 
-resource "cloudflare_dns_record" "sdns" {
+resource "cloudflare_dns_record" "dns" {
   zone_id = var.zone_id
   type    = "A"
   name    = "${var.common_name}.${var.domain_name}"
   content = var.ip_address
   proxied = false
   ttl     = 1
+  # lifecycle {
+  #   replace_triggered_by = [
+  #     var.ip_address
+  #   ]
+  # }
 }
 
 resource "cloudflare_dns_record" "acme_challenge" {

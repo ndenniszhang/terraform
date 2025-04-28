@@ -5,6 +5,8 @@ module "tls" {
   domain_name = var.domain_name
   email       = var.cloudflare_email
   api_token   = var.cloudflare_api_token
+  cert_path   = var.acme_cert_path
+  key_path    = var.acme_key_path
 }
 
 module "sdns" {
@@ -13,6 +15,9 @@ module "sdns" {
   client_id       = var.azure_client_id
   client_secret   = var.azure_client_secret
   subscription_id = var.azure_subscription_id
+  cert_path       = var.acme_cert_path
+  key_path        = var.acme_key_path
+  common_name     = var.common_name
 }
 
 module "cdn" {

@@ -24,3 +24,13 @@ variable "api_token" {
   type        = string
   sensitive   = true
 }
+
+variable "cert_path" {
+  description = "The local path to the certificate file"
+  type        = string
+}
+
+variable "key_path" {
+  description = "The local path to the private key file"
+  type        = string
+}

@@ -1,5 +1,5 @@
 resource "azurerm_container_group" "aci" {
-  name                = "${var.service_name}aci"
+  name                = "${var.common_name}aci${random_id.rand.hex}"
   ip_address_type     = "Public"
   os_type             = "Linux"
   location            = azurerm_resource_group.rg.location
@@ -13,7 +13,7 @@ resource "azurerm_container_group" "aci" {
   }
 
   container {
-    name   = "${var.service_name}adguard"
+    name   = "${var.common_name}adguard"
     image  = var.adguard_image
     cpu    = "1.0"
     memory = "1.0"
@@ -62,7 +62,7 @@ resource "azurerm_container_group" "aci" {
   }
 
   container {
-    name   = "${var.service_name}unbound"
+    name   = "${var.common_name}unbound"
     image  = var.unbound_image
     cpu    = "1.0"
     memory = "1.0"

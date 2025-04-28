@@ -1,3 +1,22 @@
+variable "acme_url" {
+  description = "ACME server URL"
+  type        = string
+  default     = "https://acme-v02.api.letsencrypt.org/directory"
+  # default     = "https://acme-staging-v02.api.letsencrypt.org/directory"
+}
+
+variable "acme_cert_path" {
+  description = "The local path to the certificate file"
+  type        = string
+  default     = "./config/cert/certificate.pem"
+}
+
+variable "acme_key_path" {
+  description = "The local path to the private key file"
+  type        = string
+  default     = "./config/cert/private_key.pem"
+}
+
 variable "azure_subscription_id" {
   description = "Subscription ID"
   type        = string
@@ -46,27 +65,20 @@ variable "cloudflare_account_id" {
   sensitive   = true
 }
 
-variable "acme_url" {
-  description = "ACME server URL"
-  type        = string
-  default     = "https://acme-v02.api.letsencrypt.org/directory"
-  # default     = "https://acme-staging-v02.api.letsencrypt.org/directory"
-}
-
 variable "common_name" {
   description = "Common name for the certificate"
   type        = string
   default     = "dns"
 }
 
-variable "domain_name" {
-  description = "Domain name for the certificate"
-  type        = string
-  default     = "denniszhang.dev"
-}
-
 variable "dns_provider" {
   description = "DNS provider for ACME DNS challenge"
   type        = string
   default     = "cloudflare"
+}
+
+variable "domain_name" {
+  description = "Domain name for the certificate"
+  type        = string
+  default     = "denniszhang.dev"
 }
