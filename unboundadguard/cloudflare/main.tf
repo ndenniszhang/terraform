@@ -14,9 +14,18 @@ provider "cloudflare" {
 
 resource "cloudflare_dns_record" "sdns" {
   zone_id = var.zone_id
-  name    = var.common_name
-  content = var.ip_address
   type    = "A"
-  proxied = true
+  name    = "${var.common_name}.${var.domain_name}"
+  content = var.ip_address
+  proxied = false
+  ttl     = 1
+}
+
+resource "cloudflare_dns_record" "acme_challenge" {
+  zone_id = var.zone_id
+  type    = "TXT"
+  name    = "_acme-challenge.${var.common_name}.${var.domain_name}"
+  content = "" # This will be updated by the ACME provider during certificate issuance
+  proxied = false
   ttl     = 1
 }

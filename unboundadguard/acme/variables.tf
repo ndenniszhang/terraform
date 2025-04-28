@@ -13,7 +13,14 @@ variable "domain_name" {
   type        = string
 }
 
-variable "dns_provider" {
-  description = "DNS provider for ACME DNS challenge"
+variable "email" {
+  description = "Cloudflare account email"
   type        = string
+  sensitive   = true
+}
+
+variable "api_token" {
+  description = "Cloudflare API key"
+  type        = string
+  sensitive   = true
 }

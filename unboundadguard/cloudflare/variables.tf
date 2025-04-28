@@ -1,29 +1,34 @@
 variable "email" {
-  description = "Cloudflare account email"
-  type        = string
-  sensitive   = true
-}
-
-variable "api_token" {
-  description = "Cloudflare API key"
-  type        = string
-  sensitive   = true
-}
-
-variable "zone_id" {
-  description = "Cloudflare zone ID"
+  description = "Account email"
   type        = string
   sensitive   = true
 }
 
 variable "account_id" {
-  description = "Cloudflare account ID"
+  description = "Account ID"
   type        = string
   sensitive   = true
 }
 
+variable "api_token" {
+  description = "API key"
+  type        = string
+  sensitive   = true
+}
+
+variable "zone_id" {
+  description = "Zone ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "domain_name" {
+  description = "Domain name for the DNS record"
+  type        = string
+}
+
 variable "common_name" {
-  description = "Common name for the certificate"
+  description = "Common name for the DNS record"
   type        = string
 }
 

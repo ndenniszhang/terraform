@@ -1,5 +1,29 @@
+variable "subscription_id" {
+  description = "Subscription ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "tenant_id" {
+  description = "Tenant ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "client_id" {
+  description = "Client ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "client_secret" {
+  description = "Client Secret"
+  type        = string
+  sensitive   = true
+}
+
 variable "location" {
-  description = "The Azure region where resources will be created"
+  description = "Region where resources will be created"
   type        = string
   default     = "eastus2"
 }
@@ -23,8 +47,9 @@ variable "adguard_image" {
 }
 
 variable "adguard_path" {
-  type    = string
-  default = "/opt/adguardhome"
+  description = "The path in AdGuard container to persist"
+  type        = string
+  default     = "/opt/adguardhome"
 }
 
 variable "unbound_image" {
@@ -34,18 +59,7 @@ variable "unbound_image" {
 }
 
 variable "unbound_path" {
-  type    = string
-  default = "/opt/unbound/etc/unbound"
-}
-
-variable "certificate_pem" {
-  description = "The certificate in PEM format"
+  description = "The path in Unbound conainer to persist"
   type        = string
-  sensitive   = true
-}
-
-variable "private_key_pem" {
-  description = "The private key in PEM format"
-  type        = string
-  sensitive   = true
+  default     = "/opt/unbound/etc/unbound"
 }
