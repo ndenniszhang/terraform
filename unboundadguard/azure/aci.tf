@@ -1,9 +1,10 @@
 resource "azurerm_container_group" "aci" {
   name                = "${var.common_name}aci${random_id.rand.hex}"
-  ip_address_type     = "Public"
-  os_type             = "Linux"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  os_type             = "Linux"
+  # ip_address_type     = "Private"
+  # subnet_ids = [azurerm_subnet.aci_subnet.id]
 
   diagnostics {
     log_analytics {
@@ -93,3 +94,24 @@ resource "azurerm_container_group" "aci" {
     }
   }
 }
+
+# resource "azurerm_network_profile" "aci_profile" {
+#   name                = "${var.common_name}netprofile${random_id.rand.hex}"
+#   location            = azurerm_resource_group.rg.location
+#   resource_group_name = azurerm_resource_group.rg.name
+
+#   container_network_interface {
+#     name = "aci-nic"
+
+#     ip_configuration {
+#       name      = "aci-ipconfig"
+#       subnet_id = azurerm_subnet.aci_subnet.id
+#     }
+#   }
+# }
+
+# resource "azurerm_lb_backend_address_pool_address" "backend_address" {
+#   name                    = "${var.common_name}-backend-address"
+#   backend_address_pool_id = azurerm_lb_backend_address_pool.default.id
+#   ip_address              = azurerm_container_group.aci.ip_address
+# }
