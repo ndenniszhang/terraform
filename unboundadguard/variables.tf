@@ -41,6 +41,18 @@ variable "azure_client_secret" {
   sensitive   = true
 }
 
+variable "azure_location" {
+  description = "Region where resources will be created"
+  type        = string
+  default     = "eastus2"
+}
+
+variable "azure_resource_group_name" {
+  description = "Name of the resource group"
+  type        = string
+  default     = "rg_azu_e2_dns"
+}
+
 variable "cloudflare_email" {
   description = "Cloudflare account email"
   type        = string

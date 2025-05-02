@@ -25,13 +25,11 @@ variable "client_secret" {
 variable "location" {
   description = "Region where resources will be created"
   type        = string
-  default     = "eastus2"
 }
 
 variable "resource_group_name" {
   description = "Name of the resource group"
   type        = string
-  default     = "rg_azu_e2_dns"
 }
 
 variable "common_name" {

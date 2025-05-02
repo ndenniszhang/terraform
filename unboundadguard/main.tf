@@ -10,14 +10,16 @@ module "tls" {
 }
 
 module "dns" {
-  source          = "./azure"
-  tenant_id       = var.azure_tenant_id
-  client_id       = var.azure_client_id
-  client_secret   = var.azure_client_secret
-  subscription_id = var.azure_subscription_id
-  cert_path       = var.acme_cert_path
-  key_path        = var.acme_key_path
-  common_name     = var.common_name
+  source              = "./azure"
+  tenant_id           = var.azure_tenant_id
+  client_id           = var.azure_client_id
+  client_secret       = var.azure_client_secret
+  subscription_id     = var.azure_subscription_id
+  location            = var.azure_location
+  resource_group_name = var.azure_resource_group_name
+  cert_path           = var.acme_cert_path
+  key_path            = var.acme_key_path
+  common_name         = var.common_name
 }
 
 module "cdn" {
@@ -29,5 +31,5 @@ module "cdn" {
   common_name = var.common_name
   domain_name = var.domain_name
   # ip_address  = module.dns.public_ip
-  ip_address  = module.dns.container_ip
+  ip_address = module.dns.container_ip
 }
