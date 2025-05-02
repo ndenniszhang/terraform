@@ -3,15 +3,15 @@ resource "azurerm_container_group" "aci" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   os_type             = "Linux"
-  # ip_address_type     = "Private"
-  # subnet_ids = [azurerm_subnet.aci_subnet.id]
+  ip_address_type     = "Private"
+  subnet_ids          = [azurerm_subnet.aci_subnet.id]
 
-  diagnostics {
-    log_analytics {
-      workspace_id  = azurerm_log_analytics_workspace.logs.workspace_id
-      workspace_key = azurerm_log_analytics_workspace.logs.primary_shared_key
-    }
-  }
+  # diagnostics {
+  #   log_analytics {
+  #     workspace_id  = azurerm_log_analytics_workspace.logs.workspace_id
+  #     workspace_key = azurerm_log_analytics_workspace.logs.primary_shared_key
+  #   }
+  # }
 
   container {
     name   = "${var.common_name}adguard"
@@ -95,8 +95,9 @@ resource "azurerm_container_group" "aci" {
   }
 }
 
-# resource "azurerm_lb_backend_address_pool_address" "backend_address" {
-#   name                    = "${var.common_name}-backend-address"
-#   backend_address_pool_id = azurerm_lb_backend_address_pool.default.id
-#   ip_address              = azurerm_container_group.aci.ip_address
-# }
+resource "azurerm_lb_backend_address_pool_address" "backend_address" {
+  name                    = "${var.common_name}-backend-address"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.default.id
+  ip_address              = azurerm_container_group.aci.ip_address
+  virtual_network_id      = azurerm_virtual_network.vnet.id
+}
