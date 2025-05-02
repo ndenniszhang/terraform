@@ -6,16 +6,7 @@ resource "azurerm_lb_rule" "lb_rule_dns_udp" {
   frontend_port                  = 53
   backend_port                   = 53
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.default.id]
-  probe_id                       = azurerm_lb_probe.lb_probe_dns.id
-}
-
-resource "azurerm_lb_probe" "lb_probe_dns" {
-  name                = "${var.common_name}-probe-dns"
-  loadbalancer_id     = azurerm_lb.default.id
-  protocol            = "Tcp"
-  port                = 53
-  interval_in_seconds = 5
-  number_of_probes    = 2
+  probe_id                       = azurerm_lb_probe.lb_probe_http.id
 }
 
 resource "azurerm_lb_rule" "lb_rule_http" {
