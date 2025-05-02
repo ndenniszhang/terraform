@@ -17,7 +17,7 @@ resource "cloudflare_dns_record" "dns" {
   type    = "A"
   name    = "${var.common_name}.${var.domain_name}"
   content = var.ip_address
-  proxied = false
+  proxied = true
   ttl     = 1
   # lifecycle {
   #   replace_triggered_by = [
