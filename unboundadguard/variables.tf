@@ -77,20 +77,19 @@ variable "cloudflare_account_id" {
   sensitive   = true
 }
 
-variable "common_name" {
-  description = "Common name for the certificate"
-  type        = string
-  default     = "dns"
-}
-
 variable "dns_provider" {
   description = "DNS provider for ACME DNS challenge"
   type        = string
   default     = "cloudflare"
 }
 
+variable "common_name" {
+  description = "Common name for the certificate"
+  type        = string
+  default     = "dns"
+}
+
 variable "domain_name" {
   description = "Domain name for the certificate"
   type        = string
-  default     = "denniszhang.dev"
 }

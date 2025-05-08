@@ -6,7 +6,6 @@ resource "azurerm_storage_account" "storage" {
   location                 = azurerm_resource_group.rg.location
 }
 
-
 resource "azurerm_storage_share" "adguard" {
   name                 = "${var.common_name}adguard"
   storage_account_name = azurerm_storage_account.storage.name

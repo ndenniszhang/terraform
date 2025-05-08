@@ -9,16 +9,16 @@ resource "azurerm_lb_rule" "lb_rule_dns_udp" {
   probe_id                       = azurerm_lb_probe.lb_probe_http.id
 }
 
-resource "azurerm_lb_rule" "lb_rule_http" {
-  name                           = "${var.common_name}-rule-http"
-  loadbalancer_id                = azurerm_lb.default.id
-  frontend_ip_configuration_name = "PublicIPAddress"
-  protocol                       = "Tcp"
-  frontend_port                  = 80
-  backend_port                   = 80
-  backend_address_pool_ids       = [azurerm_lb_backend_address_pool.default.id]
-  probe_id                       = azurerm_lb_probe.lb_probe_http.id
-}
+# resource "azurerm_lb_rule" "lb_rule_http" {
+#   name                           = "${var.common_name}-rule-http"
+#   loadbalancer_id                = azurerm_lb.default.id
+#   frontend_ip_configuration_name = "PublicIPAddress"
+#   protocol                       = "Tcp"
+#   frontend_port                  = 80
+#   backend_port                   = 80
+#   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.default.id]
+#   probe_id                       = azurerm_lb_probe.lb_probe_http.id
+# }
 
 resource "azurerm_lb_probe" "lb_probe_http" {
   name                = "${var.common_name}-probe-http"
