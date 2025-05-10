@@ -16,8 +16,8 @@ resource "azurerm_container_group" "aci" {
   container {
     name   = "${var.common_name}adguard"
     image  = var.adguard_image
-    cpu    = "1.0"
-    memory = "1.0"
+    cpu    = "0.5"
+    memory = "0.5"
 
     ports {
       port     = 53
@@ -65,8 +65,8 @@ resource "azurerm_container_group" "aci" {
   container {
     name   = "${var.common_name}unbound"
     image  = var.unbound_image
-    cpu    = "1.0"
-    memory = "1.0"
+    cpu    = "0.5"
+    memory = "0.5"
 
     commands = [
       "bash",
@@ -75,7 +75,7 @@ resource "azurerm_container_group" "aci" {
     ]
 
     ports {
-      port     = 5353
+      port     = 53
       protocol = "UDP"
     }
 

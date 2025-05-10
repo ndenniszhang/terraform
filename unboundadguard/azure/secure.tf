@@ -3,5 +3,5 @@ resource "azurerm_storage_account_network_rules" "firewall_rules" {
   default_action             = "Deny"
   virtual_network_subnet_ids = [azurerm_subnet.aci_subnet.id]
   bypass                     = ["AzureServices"]
-  # ip_rules                   = azurerm_subnet.aci.address_prefixes
+  # ip_rules                   = []
 }
